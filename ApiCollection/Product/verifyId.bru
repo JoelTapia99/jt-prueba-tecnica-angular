@@ -1,0 +1,27 @@
+meta {
+  name: verifyId
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{base_url}}/bp/products/verification/dos
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+   "name": "Nombre actualizado",
+   "description": "Descripción producto",
+   "logo": "assets-1.png",
+   "date_release": "2025-01-01",
+   "date_revision": "2025-01-01"
+  }
+  
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
