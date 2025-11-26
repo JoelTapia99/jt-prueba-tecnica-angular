@@ -3,8 +3,13 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "baseUrl": "./",
     "outDir": "./out-tsc/spec",
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals"],
+    "paths": {
+      "@common/*": ["src/app/modules/common/*"],
+      "@products/*": ["src/app/modules/product/"],
+    }
   },
   "include": ["src/**/*.d.ts", "src/**/*.spec.ts"]
 }

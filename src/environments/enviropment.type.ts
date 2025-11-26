@@ -1,3 +1,3 @@
 export interface IEnvironment {
-  serverUrl: string;
+  apiUrl: string;
 }

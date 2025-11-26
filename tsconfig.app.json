@@ -3,8 +3,13 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "baseUrl": "./",
     "outDir": "./out-tsc/app",
-    "types": ["node"]
+    "types": ["node"],
+    "paths": {
+      "@common/*": ["src/app/modules/common/*"],
+      "@products/*": ["src/app/modules/product/"]
+    }
   },
   "include": ["src/**/*.ts"],
   "exclude": ["src/**/*.spec.ts"]
