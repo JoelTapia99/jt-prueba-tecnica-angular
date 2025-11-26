@@ -1,0 +1,158 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f4f8;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align at the top */
+  min-height: 100vh;
+  margin: 0;
+  padding-top: 50px; /* Space for the header */
+}
+
+.header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  background-color: #f0f4f8;
+  border-bottom: 1px solid #e0e6ed;
+  box-sizing: border-box;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+}
+
+.header-logo {
+  width: 30px; /* Adjust as needed */
+  height: 30px; /* Adjust as needed */
+  background-color: #1a73e8; /* Example color, replace with actual logo */
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg>') no-repeat center / contain;
+  -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg>') no-repeat center / contain;
+}
+
+.header-text {
+  margin-left: 10px;
+  font-weight: 500;
+  color: #333;
+  font-size: 1.2em;
+}
+
+.form-container {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  width: 700px; /* Adjusted width for better layout */
+  box-sizing: border-box;
+  margin-top: 50px; /* Pushed down to clear the header */
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+  font-weight: 500;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 30px; /* Increased gap between columns */
+  margin-bottom: 30px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #555;
+  font-size: 0.9em;
+}
+
+.form-group input[type="text"] {
+  padding: 12px;
+  border: 1px solid #ccd6e0;
+  border-radius: 6px;
+  font-size: 1em;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input[type="text"]:focus {
+  border-color: #1a73e8;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+}
+
+.form-group .input-error {
+  border-color: #e53935;
+  background-color: #fffafa;
+}
+
+.error-message {
+  color: #e53935;
+  font-size: 0.85em;
+  margin-top: 5px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.form-actions button {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  font-weight: 500;
+}
+
+.form-actions .reset-button {
+  background-color: #e0e6ed;
+  color: #555;
+}
+
+.form-actions .reset-button:hover {
+  background-color: #ced4da;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-actions .submit-button {
+  background-color: #fdd835; /* Yellow color */
+  color: #333;
+}
+
+.form-actions .submit-button:hover {
+  background-color: #fbc02d;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Specific styles for the "Fecha Revisión" field as it's greyed out */
+.form-group .disabled-input {
+  background-color: #f5f5f5;
+  color: #888;
+  cursor: not-allowed;
+}
+
+.button-go-back{
+  margin-top: 15px;
+  background-color: transparent;
+  border: none;
+  color: #1a73e8;
+  cursor: pointer;
+  font-size: 0.9em;
+  text-decoration: underline;
+}

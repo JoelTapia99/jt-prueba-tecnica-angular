@@ -1,16 +1,19 @@
-<div class="container">
-  <header class="app-header">
+<header class="app-header">
     <span class="icon-bank">
       <jt-img [path]="'icons/bank-icon.png'" [height]="30" [width]="30" [alt]="'bank-icon'"/>
     </span>
-    <span class="app-name">BANCO</span>
-  </header>
+  <span class="app-name">BANCO</span>
+</header>
 
-  <div class="card">
+<div class="container">
+  <section class="form-actions-table">
     <div class="search-bar">
       <input type="text" placeholder="Search..." (input)="filterProducts($event)"/>
     </div>
+    <a class="button" [routerLink]="ROUTES.CREATE_PRODUCT">Agregar</a>
+  </section>
 
+  <div class="card">
     <table class="data-table">
       <thead>
       <tr>

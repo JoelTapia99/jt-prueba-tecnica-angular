@@ -1,0 +1,16 @@
+<div class="form-group">
+  <label [for]="inputId">{{ label }}</label>
+
+  <input
+    type="text"
+    [id]="inputId"
+    [value]="value"
+    (input)="onInput($event)"
+    (blur)="onTouched()"
+    [disabled]="isDisabled"
+    [class.input-error]="showError"
+  />
+  @if (showError()) {
+    <span class="error-message">{{ errorMessage }}</span>
+  }
+</div>
