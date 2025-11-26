@@ -17,7 +17,7 @@
     "module": "preserve",
     "paths": {
       "@common/*": ["src/app/modules/common/*"],
-      "@products/*": ["src/app/modules/product/"],
+      "@products/*": ["src/app/modules/product/"]
     }
   },
   "angularCompilerOptions": {
