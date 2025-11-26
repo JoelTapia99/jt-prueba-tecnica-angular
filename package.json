@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:jt-prueba-tecnica-angular": "node dist/jt-prueba-tecnica-angular/server/server.mjs"
+    "serve:ssr:jt-prueba-tecnica-angular": "node dist/jt-prueba-tecnica-angular/server/server.mjs",
+    "format": "prettier --write \"**/*.{js,ts,json,html,css,scss}\""
   },
   "prettier": {
     "printWidth": 100,
@@ -40,9 +41,12 @@
     "@angular/build": "^21.0.0",
     "@angular/cli": "^21.0.0",
     "@angular/compiler-cli": "^21.0.0",
+    "@trivago/prettier-plugin-sort-imports": "^6.0.0",
     "@types/express": "^5.0.1",
     "@types/node": "^20.17.19",
     "jsdom": "^27.1.0",
+    "prettier": "^3.6.2",
+    "prettier-plugin-organize-imports": "^4.3.0",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
   }

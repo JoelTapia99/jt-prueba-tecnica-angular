@@ -1,0 +1,16 @@
+# Node directories
+/dist
+/node_modules
+
+# Angular directories
+/angular.json
+/.angular
+
+# Logs
+*.log
+
+# cache files
+.prettiercache
+
+# Bruno files
+/ApiCollection
