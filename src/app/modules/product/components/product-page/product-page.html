@@ -1,34 +1,34 @@
 <div class="container">
   <header class="app-header">
     <span class="icon-bank">
-      <jt-img [path]="'icons/bank-icon.png'" [height]="30" [width]="30" [alt]="'bank-icon'" />
+      <jt-img [path]="'icons/bank-icon.png'" [height]="30" [width]="30" [alt]="'bank-icon'"/>
     </span>
     <span class="app-name">BANCO</span>
   </header>
 
   <div class="card">
     <div class="search-bar">
-      <input type="text" placeholder="Search..." (input)="filterProducts($event)" />
+      <input type="text" placeholder="Search..." (input)="filterProducts($event)"/>
     </div>
 
     <table class="data-table">
       <thead>
-        <tr>
-          <th class="col-logo">Logo</th>
-          <th>Nombre del producto</th>
-          <th>
-            Descripción
-            <span class="info-icon">i</span>
-          </th>
-          <th>
-            Fecha de liberación
-            <span class="info-icon">i</span>
-          </th>
-          <th>
-            Fecha de reestructuración
-            <span class="info-icon">i</span>
-          </th>
-        </tr>
+      <tr>
+        <th class="col-logo">Logo</th>
+        <th>Nombre del producto</th>
+        <th>
+          Descripción
+          <span class="info-icon">i</span>
+        </th>
+        <th>
+          Fecha de liberación
+          <span class="info-icon">i</span>
+        </th>
+        <th>
+          Fecha de reestructuración
+          <span class="info-icon">i</span>
+        </th>
+      </tr>
       </thead>
       <tbody>
         @for (product of productStore.products(); track product.id) {
@@ -49,16 +49,11 @@
       </tbody>
     </table>
 
-    <div class="footer">
-      <div class="progress-bar"></div>
-      <div class="pagination">
-        <span class="results-count">5 Resultados</span>
-        <select class="dropdown">
-          <option>5</option>
-          <option>10</option>
-          <option>25</option>
-        </select>
-      </div>
-    </div>
+    <div class="progress-bar"></div>
+    <span class="results-count">{{ productStore.productCounter() }}</span>
+
+    <jt-pagination [options]="PRODUCT_PAGE_OPTIONS" [totalResults]="productStore.pagination().totalResults"
+                   [pageSizeInput]="productStore.pagination().pageSize"
+                   (onPageSize)="productStore.paginate(1, $event)"/>
   </div>
 </div>

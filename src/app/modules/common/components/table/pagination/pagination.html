@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="pagination">
+    <select
+      class="dropdown"
+      [ngModel]="pageSize()"
+      (ngModelChange)="onChange($event)"
+    >
+      @for (size of pageSizes(); track size) {
+        <option
+          [value]="size"
+          [disabled]="size > totalResults()"
+        >
+          {{ size }}
+        </option>
+      }
+    </select>
+  </div>
+</div>

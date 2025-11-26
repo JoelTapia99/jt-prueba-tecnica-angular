@@ -4,6 +4,8 @@ import { ProductApi, ProductResponse } from '../../api/product-api';
 import { IBadApiResponse } from '@common/models/ApiResponse.model';
 import { dateToISOString } from '@common/utils/date.util';
 import { finalize } from 'rxjs';
+import { IPagination } from '@common/models/Pagination.model';
+import { DEFAULT_PRODUCT_PAGE } from '../../constants/pagination.constants';
 
 @Injectable({
   providedIn: 'root',
@@ -14,9 +16,14 @@ export class ProductStore {
   // =========| STATE |=========
   private readonly _rawProductData = signal<IProduct[]>([]);
   private readonly _isLoading = signal(false);
+  private readonly _pagination = signal<IPagination>(DEFAULT_PRODUCT_PAGE);
 
   // =========| SELECTORS |=========
   readonly products = signal<IProduct[]>([]);
+  readonly productCounter = computed(() =>
+    this.buildProductCounter(this._rawProductData(), this.products()),
+  );
+  readonly pagination = computed(() => this._pagination());
   readonly isLoading = computed(() => this._isLoading);
 
   // =========| ACTIONS  |=========
@@ -29,6 +36,7 @@ export class ProductStore {
         const products = res.data || [];
         this._rawProductData.set(res.data || []);
         this.products.set(products);
+        this.paginate(DEFAULT_PRODUCT_PAGE.currentPage, DEFAULT_PRODUCT_PAGE.pageSize);
       });
   }
 
@@ -99,5 +107,27 @@ export class ProductStore {
       },
       complete: () => this._isLoading.set(false),
     });
+  }
+
+  paginate(page: number, pageSize: number): void {
+    console.log('pageSize', pageSize);
+    const allProducts = this._rawProductData();
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    const paginatedProducts = allProducts.slice(startIndex, endIndex);
+
+    this.products.set(paginatedProducts);
+    this._pagination.set({
+      totalResults: allProducts.length,
+      pageSize,
+      currentPage: page,
+    });
+  }
+
+  private buildProductCounter(allProducts: IProduct[], productsFiltered: IProduct[]): string {
+    if (allProducts.length === 0) return 'No hay productos.';
+    if (allProducts.length === 1) return '1 Producto.';
+    if (allProducts.length === productsFiltered.length) return `${allProducts.length} Productos.`;
+    return `${productsFiltered.length} Resultados de ${allProducts.length}.`;
   }
 }
