@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { IProduct } from '../../models/Product.model';
-import { ProductApi, ProductResponse } from '../../api/product.api';
+import { ProductApi, ProductResponse } from '../../api/product-api';
 import { IBadApiResponse } from '@common/models/ApiResponse.model';
 
 @Injectable({
