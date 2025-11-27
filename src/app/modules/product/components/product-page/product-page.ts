@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProductStore } from '../../stores/productStore/product-store';
 import { Pagination } from '@common/components/table/pagination/pagination';
 import { PRODUCT_PAGE_OPTIONS } from '../../constants/pagination.constants';
@@ -13,7 +13,7 @@ import { ProductHeader } from '../product-header/product-header';
   templateUrl: './product-page.html',
   styleUrl: './product-page.css',
 })
-export class ProductPage {
+export class ProductPage implements OnInit {
   private readonly router = inject(Router);
   productStore = inject(ProductStore);
 
@@ -21,7 +21,7 @@ export class ProductPage {
   selectedProductName = signal<string>('');
   productIdToDelete = signal<string>('');
 
-  constructor() {
+  ngOnInit(): void {
     this.productStore.loadProducts();
   }
 

@@ -45,7 +45,10 @@ export class ProductStore {
   searchProducts(searchCriteria: string): void {
     this.isLoading.set(true);
     const allProducts = this._rawProductData();
-    if (!searchCriteria) return this.products.set(allProducts);
+    if (!searchCriteria) {
+      this.isLoading.set(false);
+      return this.products.set(allProducts);
+    }
 
     const query = searchCriteria.toLowerCase();
 
@@ -59,7 +62,6 @@ export class ProductStore {
         return normalized.includes(query);
       });
     });
-
     this.products.set(productsFiltered);
     this.isLoading.set(false);
   }
