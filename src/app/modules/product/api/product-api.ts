@@ -13,7 +13,7 @@ export type ProductUpdateResponse = { message: string };
   providedIn: 'root',
 })
 export class ProductApi {
-  private readonly apiUrl = `${environment.apiUrl}/bp/products`;
+  private readonly apiUrl = `api/bp/products`;
   private readonly http = inject(HttpClient);
 
   getAll(): Observable<ProductResponseList> {

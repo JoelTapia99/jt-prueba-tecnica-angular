@@ -101,6 +101,7 @@ export class ProductStore {
       next: () => {
         this._rawProductData.update((products) => products.filter((product) => product.id !== id));
         this.searchProducts('');
+        this.paginate(this._pagination().currentPage, this._pagination().pageSize);
       },
       complete: () => this.isLoading.set(false),
     });
