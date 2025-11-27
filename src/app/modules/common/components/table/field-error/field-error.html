@@ -1,0 +1,19 @@
+@if (hasError) {
+  @if (control()?.errors?.['required']) {
+    <small class="error-message">Este campo es requerido!</small>
+  }
+
+  @if (control()?.errors?.['maxlength']) {
+    <small class="error-message">
+      Este campo no debe tener más de
+      {{ control()?.errors?.['maxlength']?.requiredLength }} caracteres.
+    </small>
+  }
+
+  @if (control()?.errors?.['minlength']) {
+    <small class="error-message">
+      Este campo debe tener mínimo
+      {{ control()?.errors?.['minlength']?.requiredLength }} caracteres.
+    </small>
+  }
+}

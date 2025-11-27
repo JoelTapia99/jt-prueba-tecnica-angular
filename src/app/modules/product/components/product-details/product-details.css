@@ -31,8 +31,10 @@ body {
   width: 30px; /* Adjust as needed */
   height: 30px; /* Adjust as needed */
   background-color: #1a73e8; /* Example color, replace with actual logo */
-  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg>') no-repeat center / contain;
-  -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg>') no-repeat center / contain;
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg>')
+    no-repeat center / contain;
+  -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg>')
+    no-repeat center / contain;
 }
 
 .header-text {
@@ -78,7 +80,7 @@ h2 {
   font-size: 0.9em;
 }
 
-.form-group input[type="text"] {
+.form-group input[type='text'] {
   padding: 12px;
   border: 1px solid #ccd6e0;
   border-radius: 6px;
@@ -87,7 +89,7 @@ h2 {
   transition: border-color 0.3s ease;
 }
 
-.form-group input[type="text"]:focus {
+.form-group input[type='text']:focus {
   border-color: #1a73e8;
   outline: none;
   box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
@@ -116,7 +118,9 @@ h2 {
   border-radius: 6px;
   font-size: 1em;
   cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
   font-weight: 500;
 }
 
@@ -147,7 +151,7 @@ h2 {
   cursor: not-allowed;
 }
 
-.button-go-back{
+.button-go-back {
   margin-top: 15px;
   background-color: transparent;
   border: none;

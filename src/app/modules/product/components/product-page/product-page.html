@@ -1,14 +1,14 @@
 <header class="app-header">
-    <span class="icon-bank">
-      <jt-img [path]="'icons/bank-icon.png'" [height]="30" [width]="30" [alt]="'bank-icon'"/>
-    </span>
+  <span class="icon-bank">
+    <jt-img [path]="'icons/bank-icon.png'" [height]="30" [width]="30" [alt]="'bank-icon'" />
+  </span>
   <span class="app-name">BANCO</span>
 </header>
 
 <div class="container">
   <section class="form-actions-table">
     <div class="search-bar">
-      <input type="text" placeholder="Search..." (input)="filterProducts($event)"/>
+      <input type="text" placeholder="Search..." (input)="filterProducts($event)" />
     </div>
     <a class="button" [routerLink]="ROUTES.CREATE_PRODUCT">Agregar</a>
   </section>
@@ -16,22 +16,22 @@
   <div class="card">
     <table class="data-table">
       <thead>
-      <tr>
-        <th class="col-logo">Logo</th>
-        <th>Nombre del producto</th>
-        <th>
-          Descripción
-          <span class="info-icon">i</span>
-        </th>
-        <th>
-          Fecha de liberación
-          <span class="info-icon">i</span>
-        </th>
-        <th>
-          Fecha de reestructuración
-          <span class="info-icon">i</span>
-        </th>
-      </tr>
+        <tr>
+          <th class="col-logo">Logo</th>
+          <th>Nombre del producto</th>
+          <th>
+            Descripción
+            <span class="info-icon">i</span>
+          </th>
+          <th>
+            Fecha de liberación
+            <span class="info-icon">i</span>
+          </th>
+          <th>
+            Fecha de reestructuración
+            <span class="info-icon">i</span>
+          </th>
+        </tr>
       </thead>
       <tbody>
         @for (product of productStore.products(); track product.id) {
@@ -55,8 +55,11 @@
     <div class="progress-bar"></div>
     <span class="results-count">{{ productStore.productCounter() }}</span>
 
-    <jt-pagination [options]="PRODUCT_PAGE_OPTIONS" [totalResults]="productStore.pagination().totalResults"
-                   [pageSizeInput]="productStore.pagination().pageSize"
-                   (onPageSize)="productStore.paginate(1, $event)"/>
+    <jt-pagination
+      [options]="PRODUCT_PAGE_OPTIONS"
+      [totalResults]="productStore.pagination().totalResults"
+      [pageSizeInput]="productStore.pagination().pageSize"
+      (onPageSize)="productStore.paginate(1, $event)"
+    />
   </div>
 </div>

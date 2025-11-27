@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Input } from './input';
+import { FieldError } from './field-error';
 
-describe('Input', () => {
-  let component: Input;
-  let fixture: ComponentFixture<Input>;
+describe('FieldError', () => {
+  let component: FieldError;
+  let fixture: ComponentFixture<FieldError>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Input],
+      imports: [FieldError],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Input);
+    fixture = TestBed.createComponent(FieldError);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

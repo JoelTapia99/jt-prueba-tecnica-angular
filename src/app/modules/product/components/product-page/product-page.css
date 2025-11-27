@@ -15,7 +15,7 @@
   padding-top: 20px;
 }
 
-.form-actions-table{
+.form-actions-table {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -23,7 +23,7 @@
   margin-bottom: 20px;
 }
 
-.button{
+.button {
   background-color: var(--primary-color);
   color: var(--text-color);
   border: none;
@@ -161,4 +161,3 @@
   margin-right: 15px;
   font-size: 0.9rem;
 }
-

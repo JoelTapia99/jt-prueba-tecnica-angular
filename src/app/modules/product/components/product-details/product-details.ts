@@ -7,10 +7,11 @@ import { DatePipe } from '@angular/common';
 import { DEFAULT_DATE_FORMAT } from '@common/constants/date.constants';
 import { ROUTES } from '@common/constants/routes.constants';
 import { RouterLink } from '@angular/router';
+import { Input } from '@common/components/table/input/input';
 
 @Component({
   selector: 'jt-product-details',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, Input],
   providers: [DatePipe],
   templateUrl: './product-details.html',
   styleUrl: './product-details.css',

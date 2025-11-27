@@ -1,10 +1,17 @@
-import { Component, forwardRef, input } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { Component, forwardRef, inject, Injector, input, OnInit, signal } from '@angular/core';
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+  NgControl,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FieldError } from '@common/components/table/field-error/field-error';
 
 @Component({
   selector: 'jt-input',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FieldError],
   templateUrl: './input.html',
   styleUrl: './input.css',
   providers: [
@@ -15,14 +22,25 @@ import { CommonModule } from '@angular/common';
     },
   ],
 })
-export class Input implements ControlValueAccessor {
+export class Input implements ControlValueAccessor, OnInit {
+  name = input<string>();
   label = input.required<string>();
   inputId = input.required<string>();
-  errorMessage = input.required<string>();
-  showError = input.required<boolean>();
 
+  hasError = signal<boolean>(false);
   value: any = '';
   isDisabled: boolean = false;
+
+  private injector = inject(Injector);
+  public ngControl: NgControl | null = null;
+
+  ngOnInit(): void {
+    this.ngControl = this.injector.get(NgControl, null, { optional: true, self: true });
+  }
+
+  get control(): AbstractControl | null {
+    return this.ngControl ? this.ngControl.control : null;
+  }
 
   onChange = (value: any) => {};
   onTouched = () => {};
