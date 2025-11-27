@@ -5,6 +5,7 @@
   --border-color: #e0e0e0;
   --card-background: #fff;
   --background-color: #f4f6f9;
+  --error-color: #e53935;
 }
 
 body {
@@ -12,4 +13,38 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
+}
+
+.button {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin: .5rem;
+}
+
+.bg-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.bg-danger {
+  background-color: var(--error-color);
+  border-color: var(--error-color);
+  color:  var(--card-background);
+}
+
+.bg-info {
+  background-color: #2196f3;
+  border-color: #2196f3;
+}
+
+.bg-primary:hover, .bg-danger:hover, .bg-info:hover {
+  opacity: 0.9;
+  background-color: var(--card-background);
+  color: var(--text-color);
 }

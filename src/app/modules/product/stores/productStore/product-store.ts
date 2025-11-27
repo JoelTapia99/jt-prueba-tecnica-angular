@@ -40,6 +40,10 @@ export class ProductStore {
       });
   }
 
+  getById(id: string): IProduct | undefined {
+    return this._rawProductData().find((product) => product.id === id);
+  }
+
   searchProducts(searchCriteria: string): void {
     const allProducts = this._rawProductData();
     if (!searchCriteria) return this.products.set(allProducts);

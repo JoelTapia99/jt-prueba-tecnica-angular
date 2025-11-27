@@ -3,10 +3,10 @@
     <h2>Formulario de Registro</h2>
     <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
       <div class="form-grid">
-        <jt-input formControlName="id" [inputId]="'product-id'" [label]="'ID'"/>
-        <jt-input formControlName="name" inputId="product-name" label="Nombre"/>
-        <jt-input formControlName="description" inputId="product-description" label="Descripcion"/>
-        <jt-input formControlName="logo" inputId="product-logo" label="Logo"/>
+        <jt-input formControlName="id" [inputId]="'product-id'" [label]="'ID'" />
+        <jt-input formControlName="name" inputId="product-name" label="Nombre" />
+        <jt-input formControlName="description" inputId="product-description" label="Descripcion" />
+        <jt-input formControlName="logo" inputId="product-logo" label="Logo" />
         <jt-input
           formControlName="date_release"
           inputId="product-date_release"
@@ -20,7 +20,7 @@
       </div>
 
       <div class="form-actions">
-        <a type="button" class="button-go-back" [routerLink]="ROUTES.HOME">Regresar</a>
+        <a type="button" class="button-go-back" [routerLink]="''">Regresar</a>
         <button type="button" class="reset-button" (click)="onReset()">Reiniciar</button>
         <button type="submit" class="submit-button">Enviar</button>
       </div>

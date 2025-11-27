@@ -3,7 +3,6 @@ import { Img } from '@common/components/img/img';
 import { ProductStore } from '../../stores/productStore/product-store';
 import { Pagination } from '@common/components/table/pagination/pagination';
 import { PRODUCT_PAGE_OPTIONS } from '../../constants/pagination.constants';
-import { ROUTES } from '@common/constants/routes.constants';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
@@ -13,6 +12,7 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './product-page.css',
 })
 export class ProductPage {
+  private readonly router = inject(Router);
   productStore = inject(ProductStore);
 
   constructor() {
@@ -25,6 +25,9 @@ export class ProductPage {
     this.productStore.searchProducts(searchCriteria);
   }
 
+  async goToProduct(id: string) {
+    await this.router.navigate(['edit', id]);
+  }
+
   protected readonly PRODUCT_PAGE_OPTIONS = PRODUCT_PAGE_OPTIONS;
-  protected readonly ROUTES = ROUTES;
 }

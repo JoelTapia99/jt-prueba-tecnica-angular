@@ -1,6 +1,6 @@
 <header class="app-header">
   <span class="icon-bank">
-    <jt-img [path]="'icons/bank-icon.png'" [height]="30" [width]="30" [alt]="'bank-icon'" />
+    <jt-img [path]="'icons/bank-icon.png'" [height]="30" [width]="30" [alt]="'bank-icon'"/>
   </span>
   <span class="app-name">BANCO</span>
 </header>
@@ -8,34 +8,37 @@
 <div class="container">
   <section class="form-actions-table">
     <div class="search-bar">
-      <input type="text" placeholder="Search..." (input)="filterProducts($event)" />
+      <input type="text" placeholder="Search..." (input)="filterProducts($event)"/>
     </div>
-    <a class="button" [routerLink]="ROUTES.CREATE_PRODUCT">Agregar</a>
+    <a class="button" [routerLink]="'create'">Agregar</a>
   </section>
 
   <div class="card">
     <table class="data-table">
       <thead>
-        <tr>
-          <th class="col-logo">Logo</th>
-          <th>Nombre del producto</th>
-          <th>
-            Descripción
-            <span class="info-icon">i</span>
-          </th>
-          <th>
-            Fecha de liberación
-            <span class="info-icon">i</span>
-          </th>
-          <th>
-            Fecha de reestructuración
-            <span class="info-icon">i</span>
-          </th>
-        </tr>
+      <tr>
+        <th class="col-logo">Logo</th>
+        <th>Nombre del producto</th>
+        <th>
+          Descripción
+          <span class="info-icon">i</span>
+        </th>
+        <th>
+          Fecha de liberación
+          <span class="info-icon">i</span>
+        </th>
+        <th>
+          Fecha de reestructuración
+          <span class="info-icon">i</span>
+        </th>
+        <th>
+          Acciones
+        </th>
+      </tr>
       </thead>
       <tbody>
         @for (product of productStore.products(); track product.id) {
-          <tr>
+          <tr (click)="goToProduct(product.id)" class="clickable-row">
             <td class="col-logo">
               <div class="logo-placeholder">JG</div>
             </td>
@@ -43,6 +46,10 @@
             <td>{{ product.description }}</td>
             <td>{{ product.date_release }}</td>
             <td>{{ product.date_revision }}</td>
+            <td><a class="button bg-primary" (click)="goToProduct(product.id)">Editar</a><a
+              class="button bg-danger"
+              (click)="goToProduct(product.id)">Eliminar</a></td>
+
           </tr>
         } @empty {
           <tr>

@@ -1,13 +1,15 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DEFAULT_PRODUCT_FORM } from '../../constants/product-details.constants';
 import { trimObjectValues } from '@common/utils/object.util';
 import { ProductStore } from '../../stores/productStore/product-store';
 import { DatePipe } from '@angular/common';
 import { DEFAULT_DATE_FORMAT } from '@common/constants/date.constants';
-import { ROUTES } from '@common/constants/routes.constants';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Input } from '@common/components/table/input/input';
+import { ProductApi } from '../../api/product-api';
+import { IProduct } from '../../models/Product.model';
+import { Result } from '@common/utils/Result.util';
 
 @Component({
   selector: 'jt-product-details',
@@ -19,15 +21,21 @@ import { Input } from '@common/components/table/input/input';
 export class ProductDetails implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly productStore = inject(ProductStore);
+  private readonly productApi = inject(ProductApi);
   private readonly datePipe = inject(DatePipe);
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
 
   productForm!: FormGroup;
+  productToEdit = signal<IProduct | null>(null);
+  isEditMode = signal<boolean>(false);
 
   ngOnInit(): void {
-    this.initializeForm();
+    this.setInitForm();
+    this.buildForm();
   }
 
-  initializeForm(): void {
+  setInitForm(): void {
     this.productForm = this.fb.group({
       id: [
         DEFAULT_PRODUCT_FORM.id,
@@ -51,14 +59,17 @@ export class ProductDetails implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('entre', this.productForm.valid, this.productForm);
-    if (this.productForm.valid) {
-      const rawFormValue = this.productForm.getRawValue();
-      const form = trimObjectValues(rawFormValue);
-      this.productStore.createProduct(form);
-    } else {
+    this.verifyIfIdExists(this.productForm.get('id')?.value);
+    if (!this.productForm.valid) {
       this.productForm.markAllAsTouched();
+      return;
     }
+
+    const rawFormValue = this.productForm.getRawValue();
+    const form = trimObjectValues(rawFormValue);
+    this.isEditMode()
+      ? this.productStore.updateProduct(form, form.id)
+      : this.productStore.createProduct(form);
   }
 
   onReset(): void {
@@ -72,5 +83,49 @@ export class ProductDetails implements OnInit {
     return this.datePipe.transform(date, DEFAULT_DATE_FORMAT) || '';
   }
 
-  protected readonly ROUTES = ROUTES;
+  private getParamId(): Result<string, null> {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.isEditMode.set(Boolean(id));
+    return id ? Result.ok(id) : Result.empty();
+  }
+
+  private buildForm(): void {
+    const paramIdResult = this.getParamId();
+    if (paramIdResult.isEmpty()) {
+      this.isEditMode.set(false);
+      return;
+    }
+
+    paramIdResult.ifIsOkOrElse(
+      async (id) => {
+        const product = this.productStore.getById(id);
+        if (product) {
+          this.updateForm(product);
+          this.productForm.get('id')?.disable();
+        } else {
+          await this.router.navigate(['']);
+        }
+      },
+      () => this.productToEdit.set(null),
+    );
+  }
+
+  private updateForm(product: IProduct): void {
+    const date_release = this.getDateFormated(product.date_release);
+    const date_revision = this.getDateFormated(product.date_revision);
+
+    this.productForm.patchValue({
+      ...product,
+      date_release,
+      date_revision,
+    });
+  }
+
+  private verifyIfIdExists(id: string): void {
+    this.productApi.exists(id).subscribe((exists) => {
+      const productIdEditing = this.productToEdit()?.id;
+      if (exists && productIdEditing === id) return;
+      this.productForm.get('id')?.setErrors({ duplicate: true });
+    });
+  }
 }

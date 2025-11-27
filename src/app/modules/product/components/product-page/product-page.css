@@ -23,17 +23,6 @@
   margin-bottom: 20px;
 }
 
-.button {
-  background-color: var(--primary-color);
-  color: var(--text-color);
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
 .icon-bank svg {
   stroke: #4a5568;
 }

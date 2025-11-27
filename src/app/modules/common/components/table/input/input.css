@@ -20,11 +20,11 @@
 }
 
 .form-group .input-error {
-  border-color: #e53935;
+  border-color: var(--error-color);
 }
 
 .error-message {
-  color: #e53935;
+  color: var(--error-color);
   font-size: 0.85em;
   margin-top: 5px;
 }
