@@ -1,15 +1,15 @@
 import { Component, inject, signal } from '@angular/core';
-import { Img } from '@common/components/img/img';
 import { ProductStore } from '../../stores/productStore/product-store';
 import { Pagination } from '@common/components/table/pagination/pagination';
 import { PRODUCT_PAGE_OPTIONS } from '../../constants/pagination.constants';
 import { Router, RouterLink } from '@angular/router';
 import { ProductDialog } from '../product-dialog/product-dialog';
 import { IProduct } from '../../models/Product.model';
+import { ProductHeader } from '../product-header/product-header';
 
 @Component({
   selector: 'jt-product-page',
-  imports: [Img, Pagination, RouterLink, ProductDialog],
+  imports: [Pagination, RouterLink, ProductDialog, ProductHeader],
   templateUrl: './product-page.html',
   styleUrl: './product-page.css',
 })

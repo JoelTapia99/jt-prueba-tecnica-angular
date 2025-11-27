@@ -1,0 +1,19 @@
+.app-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+
+.icon-bank svg {
+  stroke: #4a5568;
+}
+
+.app-name {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #4a5568;
+  margin-left: 8px;
+  letter-spacing: 2px;
+}

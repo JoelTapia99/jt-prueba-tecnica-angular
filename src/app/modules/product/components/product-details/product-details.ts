@@ -11,10 +11,11 @@ import { ProductApi } from '../../api/product-api';
 import { IProduct } from '../../models/Product.model';
 import { Result } from '@common/utils/Result.util';
 import { firstValueFrom } from 'rxjs';
+import { ProductHeader } from '../product-header/product-header';
 
 @Component({
   selector: 'jt-product-details',
-  imports: [ReactiveFormsModule, RouterLink, Input],
+  imports: [ReactiveFormsModule, RouterLink, Input, ProductHeader],
   providers: [DatePipe],
   templateUrl: './product-details.html',
   styleUrl: './product-details.css',
