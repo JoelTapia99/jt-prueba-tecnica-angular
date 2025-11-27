@@ -28,7 +28,7 @@ export class Input implements ControlValueAccessor, OnInit {
   inputId = input.required<string>();
 
   hasError = signal<boolean>(false);
-  value: any = '';
+  value = signal<string>('');
   isDisabled: boolean = false;
 
   private injector = inject(Injector);
@@ -46,7 +46,7 @@ export class Input implements ControlValueAccessor, OnInit {
   onTouched = () => {};
 
   writeValue(value: any): void {
-    this.value = value;
+    this.value.set(value);
   }
 
   registerOnChange(fn: any): void {
@@ -63,6 +63,7 @@ export class Input implements ControlValueAccessor, OnInit {
 
   onInput(event: Event): void {
     const value = (event.target as HTMLInputElement).value;
+    this.value.set(value);
     this.onChange(value);
   }
 }

@@ -36,7 +36,7 @@
       </thead>
       <tbody>
         @for (product of productStore.products(); track product.id) {
-          <tr (click)="goToProduct(product.id)" class="clickable-row">
+          <tr  class="clickable-row">
             <td class="col-logo">
               <div class="logo-placeholder">JG</div>
             </td>
@@ -46,7 +46,7 @@
             <td>{{ product.date_revision }}</td>
             <td>
               <a class="button bg-primary" (click)="goToProduct(product.id)">Editar</a
-              ><a class="button bg-danger" (click)="goToProduct(product.id)">Eliminar</a>
+              ><a class="button bg-danger" (click)="openDeleteModal(product)">Eliminar</a>
             </td>
           </tr>
         } @empty {
@@ -68,3 +68,9 @@
     />
   </div>
 </div>
+
+<jt-product-dialog
+  [show]="showModal()"
+  [name]="selectedProductName()"
+  (cancel)="onCancel()"
+  (confirm)="onConfirm()"/>

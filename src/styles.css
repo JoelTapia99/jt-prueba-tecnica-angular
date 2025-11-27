@@ -1,5 +1,6 @@
 :root {
   --primary-color: #f5df66;
+  --secondary-color: #eaecf2;
   --text-color: #333232;
   --light-text: #666;
   --border-color: #e0e0e0;
@@ -22,6 +23,7 @@ body {
   padding: 10px 20px;
   border-radius: 4px;
   font-size: 1rem;
+  font-weight: bold;
   cursor: pointer;
   transition: background-color 0.2s;
   margin: 0.5rem;
@@ -39,8 +41,9 @@ body {
 }
 
 .bg-info {
-  background-color: #2196f3;
-  border-color: #2196f3;
+  background-color:var(--secondary-color);
+  border-color: var(--secondary-color);
+  color: var(--text-color);
 }
 
 .bg-primary:hover,

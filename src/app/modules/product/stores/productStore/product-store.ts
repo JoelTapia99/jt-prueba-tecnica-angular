@@ -108,13 +108,13 @@ export class ProductStore {
     this.productApi.delete(id).subscribe({
       next: () => {
         this._rawProductData.update((products) => products.filter((product) => product.id !== id));
+        this.searchProducts('');
       },
       complete: () => this._isLoading.set(false),
     });
   }
 
   paginate(page: number, pageSize: number): void {
-    console.log('pageSize', pageSize);
     const allProducts = this._rawProductData();
     const startIndex = (page - 1) * pageSize;
     const endIndex = startIndex + pageSize;

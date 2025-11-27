@@ -1,0 +1,19 @@
+@if (visible()) {
+  <div class="modal-backdrop">
+    <div class="modal">
+
+      <p class="message">
+        ¿Estas seguro de eliminar el producto
+        <strong>{{ productName() }}</strong>?
+      </p>
+
+      <div class="separator"></div>
+
+      <div class="actions">
+        <button class="button bg-info" (click)="close()">Cancelar</button>
+        <button class="button bg-primary" (click)="doConfirm()">Confirmar</button>
+      </div>
+
+    </div>
+  </div>
+}

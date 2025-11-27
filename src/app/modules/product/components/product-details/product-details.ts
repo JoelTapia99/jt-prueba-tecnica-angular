@@ -10,6 +10,7 @@ import { Input } from '@common/components/table/input/input';
 import { ProductApi } from '../../api/product-api';
 import { IProduct } from '../../models/Product.model';
 import { Result } from '@common/utils/Result.util';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'jt-product-details',
@@ -58,8 +59,13 @@ export class ProductDetails implements OnInit {
     });
   }
 
-  onSubmit(): void {
-    this.verifyIfIdExists(this.productForm.get('id')?.value);
+  async onSubmit(): Promise<void> {
+    console.log(this.productForm);
+    this.productForm.markAllAsTouched();
+    this.productForm.updateValueAndValidity();
+
+    await this.verifyIfIdExists(this.productForm.get('id')?.value);
+
     if (!this.productForm.valid) {
       this.productForm.markAllAsTouched();
       return;
@@ -70,13 +76,12 @@ export class ProductDetails implements OnInit {
     this.isEditMode()
       ? this.productStore.updateProduct(form, form.id)
       : this.productStore.createProduct(form);
+    await this.router.navigate(['']);
   }
 
   onReset(): void {
-    this.productForm.reset(DEFAULT_PRODUCT_FORM);
-    const date_release = this.getDateFormated(DEFAULT_PRODUCT_FORM.date_release);
-    const date_revision = this.getDateFormated(DEFAULT_PRODUCT_FORM.date_revision);
-    this.productForm.patchValue({ date_release, date_revision });
+    const formValue = this.productToEdit() ? this.productToEdit()! : DEFAULT_PRODUCT_FORM;
+    this.updateForm(formValue);
   }
 
   private getDateFormated(date: string | Date): string {
@@ -100,6 +105,7 @@ export class ProductDetails implements OnInit {
       async (id) => {
         const product = this.productStore.getById(id);
         if (product) {
+          this.productToEdit.set(product);
           this.updateForm(product);
           this.productForm.get('id')?.disable();
         } else {
@@ -121,11 +127,13 @@ export class ProductDetails implements OnInit {
     });
   }
 
-  private verifyIfIdExists(id: string): void {
-    this.productApi.exists(id).subscribe((exists) => {
-      const productIdEditing = this.productToEdit()?.id;
-      if (exists && productIdEditing === id) return;
+  private async verifyIfIdExists(id: string): Promise<void> {
+    const exists = await firstValueFrom(this.productApi.exists(id));
+
+    const productIdEditing = this.productToEdit()?.id;
+
+    if (exists && productIdEditing !== id) {
       this.productForm.get('id')?.setErrors({ duplicate: true });
-    });
+    }
   }
 }
