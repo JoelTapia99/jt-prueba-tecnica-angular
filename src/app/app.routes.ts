@@ -20,4 +20,13 @@ export const routes: Routes = [
         (c) => c.ProductDetails,
       ),
   },
+  {
+    path: 'not-found',
+    loadComponent: () =>
+      import('./modules/common/components/error-page/error-page').then((c) => c.ErrorPage),
+  },
+  {
+    path: '**',
+    redirectTo: '',
+  },
 ];

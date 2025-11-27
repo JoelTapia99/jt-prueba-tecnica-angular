@@ -1,7 +1,6 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { IProduct } from '../../models/Product.model';
 import { ProductApi, ProductResponse } from '../../api/product-api';
-import { IBadApiResponse } from '@common/models/ApiResponse.model';
 import { dateToISOString } from '@common/utils/date.util';
 import { finalize } from 'rxjs';
 import { IPagination } from '@common/models/Pagination.model';
@@ -15,23 +14,22 @@ export class ProductStore {
 
   // =========| STATE |=========
   private readonly _rawProductData = signal<IProduct[]>([]);
-  private readonly _isLoading = signal(false);
   private readonly _pagination = signal<IPagination>(DEFAULT_PRODUCT_PAGE);
 
   // =========| SELECTORS |=========
   readonly products = signal<IProduct[]>([]);
+  readonly isLoading = signal(false);
   readonly productCounter = computed(() =>
     this.buildProductCounter(this._rawProductData(), this.products()),
   );
   readonly pagination = computed(() => this._pagination());
-  readonly isLoading = computed(() => this._isLoading);
 
   // =========| ACTIONS  |=========
   loadProducts(): void {
-    this._isLoading.set(true);
+    this.isLoading.set(true);
     this.productApi
       .getAll()
-      .pipe(finalize(() => this._isLoading.set(false)))
+      .pipe(finalize(() => this.isLoading.set(false)))
       .subscribe((res) => {
         const products = res.data || [];
         this._rawProductData.set(res.data || []);
@@ -45,6 +43,7 @@ export class ProductStore {
   }
 
   searchProducts(searchCriteria: string): void {
+    this.isLoading.set(true);
     const allProducts = this._rawProductData();
     if (!searchCriteria) return this.products.set(allProducts);
 
@@ -62,10 +61,11 @@ export class ProductStore {
     });
 
     this.products.set(productsFiltered);
+    this.isLoading.set(false);
   }
 
   createProduct(product: IProduct): void {
-    this._isLoading.set(true);
+    this.isLoading.set(true);
 
     this.productApi.create(product).subscribe({
       next: (res: ProductResponse) => {
@@ -75,16 +75,12 @@ export class ProductStore {
           return products;
         });
       },
-      error: (error: IBadApiResponse) => {
-        // TODO: Handle error properly
-        console.warn(error);
-      },
-      complete: () => this._isLoading.set(false),
+      complete: () => this.isLoading.set(false),
     });
   }
 
   updateProduct(product: IProduct, id: string): void {
-    this._isLoading.set(true);
+    this.isLoading.set(true);
 
     this.productApi.update(product, id).subscribe({
       next: (res: ProductResponse) => {
@@ -94,23 +90,19 @@ export class ProductStore {
           }),
         );
       },
-      error: (error: IBadApiResponse) => {
-        // TODO: Handle error properly
-        console.warn(error);
-      },
-      complete: () => this._isLoading.set(false),
+      complete: () => this.isLoading.set(false),
     });
   }
 
   deleteProduct(id: string): void {
-    this._isLoading.set(true);
+    this.isLoading.set(true);
 
     this.productApi.delete(id).subscribe({
       next: () => {
         this._rawProductData.update((products) => products.filter((product) => product.id !== id));
         this.searchProducts('');
       },
-      complete: () => this._isLoading.set(false),
+      complete: () => this.isLoading.set(false),
     });
   }
 

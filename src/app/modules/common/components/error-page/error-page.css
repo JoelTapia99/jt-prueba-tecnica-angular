@@ -1,0 +1,43 @@
+:host {
+  display: block;
+}
+
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  background-color: var(--background-color);
+  padding: 20px;
+}
+
+.error-card {
+  background: var(--card-background);
+  padding: 40px 50px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
+  text-align: center;
+  max-width: 420px;
+  width: 100%;
+  border: 1px solid var(--border-color);
+}
+
+.error-icon {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+
+.error-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 15px;
+}
+
+.error-message {
+  font-size: 15px;
+  color: var(--light-text);
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
