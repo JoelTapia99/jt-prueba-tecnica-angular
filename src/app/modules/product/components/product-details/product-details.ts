@@ -53,10 +53,7 @@ export class ProductDetails implements OnInit {
       ],
       logo: [DEFAULT_PRODUCT_FORM.logo, Validators.required],
       date_release: [this.getDateFormated(DEFAULT_PRODUCT_FORM.date_release), Validators.required],
-      date_revision: [
-        { value: this.getDateFormated(DEFAULT_PRODUCT_FORM.date_revision), disabled: true },
-        Validators.required,
-      ],
+      date_revision: [this.getDateFormated(DEFAULT_PRODUCT_FORM.date_release), Validators.required],
     });
   }
 
@@ -85,7 +82,8 @@ export class ProductDetails implements OnInit {
     this.updateForm(formValue);
   }
 
-  private getDateFormated(date: string | Date): string {
+  private getDateFormated(date: string | Date | null): string {
+    if (!date) return '';
     return this.datePipe.transform(date, DEFAULT_DATE_FORMAT) || '';
   }
 

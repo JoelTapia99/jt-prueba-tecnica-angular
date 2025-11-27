@@ -5,6 +5,6 @@ export const DEFAULT_PRODUCT_FORM: IProduct = {
   name: '',
   description: '',
   logo: '',
-  date_release: new Date(),
-  date_revision: new Date(),
+  date_release: null,
+  date_revision: null,
 };
