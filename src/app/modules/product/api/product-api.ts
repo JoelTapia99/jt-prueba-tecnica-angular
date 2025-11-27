@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { IProduct } from '../models/Product.model';
 import { ISuccessfulApiResponse } from '@common/models/ApiResponse.model';
 import { Observable } from 'rxjs';
-import { IExistId } from '../interfaces/IExistId';
 
 export type ProductResponseList = ISuccessfulApiResponse<IProduct[]>;
 export type ProductResponse = ISuccessfulApiResponse<IProduct>;
@@ -13,7 +12,7 @@ export type ProductUpdateResponse = { message: string };
 @Injectable({
   providedIn: 'root',
 })
-export class ProductApi implements IExistId {
+export class ProductApi {
   private readonly apiUrl = `${environment.apiUrl}/bp/products`;
   private readonly http = inject(HttpClient);
 
